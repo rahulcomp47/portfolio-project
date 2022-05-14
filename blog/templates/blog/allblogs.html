@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Rahul Wagh</title>
+    <title>Rahul's Blog</title>
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -27,50 +26,29 @@
       <div class="navbar-nav ms-auto">
         <a class="nav-link" aria-current="page" href="https://twitter.com/RahulWa74460235">Twitter</a>
         <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
-        <a class="nav-link" href="{% url 'allblogs' %}">Blog</a>
+        <a class="nav-link active" href="{% url 'allblogs' %}">Blog</a>
       </div>
     </div>
   </div>
-</nav>
+  </nav>
 </header>
 
 <main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-dark">Hi, I am Rahul</h1>
-        <p class="lead text-muted">Hey, my name is Rahul and I love to make django websites. It's thrill to handling request that people want!</p>
-        <p>
-          <a href="mailto:rahulcomp47@gmail.com" class="btn btn-primary my-2">Email Me</a>
-        </p>
-        <img src="{% static 'rahul.jpg' %}" height="300"/>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-        {% for job in jobs.all %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="card-img-top" src="{{ job.image.url }}" />
-
-            <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
-
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-
-      </div>
-    </div>
+  <div class="container">
+    <h1 class="text-center pt-3">Welcome to Rahuls Blog</h1>
+    <br/>
+    <br/>
+    <h2>Latest Posts</h2>
+    <hr />
+    {% for blog in blogs.all %}
+    <a href="{% url 'detail' blog.id %}"><h3>{{ blog.title }}</h3></a>
+    {{ blog.pub_date_pretty }}
+    <br />
+    <img class="img-fluid" src="{{ blog.image.url }}" height="200" width="200"/>
+    <br />
+    <p>{{ blog.summary }}</p>
+    {% endfor %}
   </div>
-
 </main>
 
 <footer class="text-muted py-5">
